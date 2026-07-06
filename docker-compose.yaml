@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     image: nginx:alpine
-    container_name: meu_site_nginx
+    container_name: mysite
     ports:
       - "80:80"
     volumes:
