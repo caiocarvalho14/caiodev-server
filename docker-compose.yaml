@@ -6,6 +6,7 @@ services:
       - "80:80"
     volumes:
       - ./html:/usr/share/nginx/html:ro
+      # Se quiser usar o Nginx como Proxy reverso para a API posteriormente
     restart: always
     
   minecraft-server:
@@ -15,19 +16,25 @@ services:
     stdin_open: true
     restart: unless-stopped
     ports:
-      - "25565:25565"          # Porta padrão do Minecraft Java (TCP)
-      - "19132:19132/udp"      # Porta padrão do Minecraft Bedrock (UDP)
+      - "25565:25565"
+      - "19132:19132/udp"
     environment:
-      EULA: "TRUE"             # Aceita os termos de uso automaticamente
-      TYPE: "PAPER"            # Define o core do servidor como PaperMC
-      VERSION: "LATEST"        # Baixa a versão mais recente estável
-      MEMORY: "4G"             # Limite de memória RAM dedicada ao container
-      
-      # Magia automática: baixa o Geyser e Floodgate na inicialização
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "LATEST"
+      MEMORY: "4G"
       PLUGINS: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"
-      
-      # Configura o Geyser para usar autenticação via Floodgate automaticamente
       GEYSER_AUTH_TYPE: "floodgate"
     volumes:
-      # Aponta para a pasta local que você acabou de criar
       - ./minecraft:/data
+
+  # Novo serviço para o seu sistema de monitoramento
+  monitor-api:
+    build: ./monitor
+    container_name: server_monitor_api
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Dá acesso aos comandos do Docker
+      - /:/host:ro # Opcional: acesso de leitura ao sistema host para medir CPU/RAM real
