@@ -33,7 +33,7 @@ services:
       
       # IDs dos plugins da Spigot (Exemplo: 57381 é o ID do plugin TAB)
       # Se quiser mais de um, separe por vírgula: "57381,12345"
-      SPIGET_RESOURCES: "57381"
+      SPIGET_RESOURCES: "57806"
 
       # Reinicia automaticamente se travar
       ENABLE_ROLLING_LOGS: "true"
