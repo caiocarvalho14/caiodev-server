@@ -1,22 +1,61 @@
 services:
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft_server
     restart: unless-stopped
 
     ports:
-      - "5678:5678"
+      - "25565:25565/tcp"
+      - "19132:19132/udp"
 
     environment:
-      - TZ=America/Fortaleza
-      - N8N_HOST=192.168.0.46
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=http
-      - WEBHOOK_URL=http://192.168.0.46:5678/
-      - GENERIC_TIMEZONE=America/Fortaleza
+      # Obrigatório
+      EULA: "TRUE"
+
+      # Servidor
+      TYPE: PAPER
+      VERSION: LATEST
+      MEMORY: 4G
+      TZ: America/Fortaleza
+
+      # Configurações
+      MOTD: "Servidor do Caio"
+      MODE: survival
+      DIFFICULTY: hard
+      ONLINE_MODE: "TRUE"
+
+      # Configuração de SEED (coloque o número/texto que quiser)
+      SEED: "6944174826991112"
+
+      # Download automático de Recursos e Plugins
+      ENABLE_GEYSER: "true"
+      ENABLE_FLOODGATE: "true"
+      
+      # IDs dos plugins da Spigot (Exemplo: 57381 é o ID do plugin TAB)
+      # Se quiser mais de um, separe por vírgula: "57381,12345"
+      SPIGET_RESOURCES: "57381"
+
+      # Reinicia automaticamente se travar
+      ENABLE_ROLLING_LOGS: "true"
 
     volumes:
-      - n8n_data:/home/node/.n8n
+      - ./minecraft/data:/data
 
-volumes:
-  n8n_data:
+    networks:
+      - minecraft
+
+  monitor:
+    container_name: minecraft_monitor
+    restart: unless-stopped
+    working_dir: /app
+    command: sleep infinity
+    volumes:
+      - ./monitor:/app
+    depends_on:
+      - minecraft
+    networks:
+      - minecraft
+
+networks:
+  minecraft:
+    driver: bridge
