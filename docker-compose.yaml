@@ -24,7 +24,7 @@ services:
       MEMORY: "4G"             # Limite de memória RAM dedicada ao container
       
       # Magia automática: baixa o Geyser e Floodgate na inicialização
-      PLUGINS: "geyser,floodgate" 
+      PLUGINS: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"
       
       # Configura o Geyser para usar autenticação via Floodgate automaticamente
       GEYSER_AUTH_TYPE: "floodgate"
