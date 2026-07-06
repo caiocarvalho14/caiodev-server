@@ -1,0 +1,58 @@
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Arquivos de ambiente
+.env
+.env.*
+
+# Logs
+*.log
+
+# Cobertura de testes
+.coverage
+htmlcov/
+.pytest_cache/
+.cache/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Linux
+*~
+
+# Distribuição
+build/
+dist/
+*.egg-info/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Docker (opcional)
+*.pid

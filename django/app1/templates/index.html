@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor Django</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Servidor Django!</h1>
+    
+    <p>Total de cliques: {{ total_cliques }}</p>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
