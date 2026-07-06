@@ -1,19 +1,22 @@
 services:
-  minecraft-server:
-    image: itzg/minecraft-server:latest
-    container_name: minecraft_geyser_server
-    tty: true
-    stdin_open: true
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
     restart: unless-stopped
+
     ports:
-      - "25565:25565"
-      - "19132:19132/udp"
+      - "5678:5678"
+
     environment:
-      EULA: "TRUE"
-      TYPE: "PAPER"
-      VERSION: "1.21.8"
-      MEMORY: "4G"
-      PLUGINS: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"
-      GEYSER_AUTH_TYPE: "floodgate"
+      - TZ=America/Fortaleza
+      - N8N_HOST=192.168.0.46
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://192.168.0.46:5678/
+      - GENERIC_TIMEZONE=America/Fortaleza
+
     volumes:
-      - ./minecraft:/data
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
