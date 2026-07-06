@@ -1,14 +1,4 @@
 services:
-  web:
-    image: nginx:alpine
-    container_name: mysite
-    ports:
-      - "80:80"
-    volumes:
-      - ./html:/usr/share/nginx/html:ro
-      # Se quiser usar o Nginx como Proxy reverso para a API posteriormente
-    restart: always
-    
   minecraft-server:
     image: itzg/minecraft-server:latest
     container_name: minecraft_geyser_server
@@ -21,20 +11,9 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "LATEST"
+      VERSION: "1.21.8"
       MEMORY: "4G"
       PLUGINS: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"
       GEYSER_AUTH_TYPE: "floodgate"
     volumes:
       - ./minecraft:/data
-
-  # Novo serviço para o seu sistema de monitoramento
-  monitor-api:
-    build: ./monitor
-    container_name: server_monitor_api
-    restart: always
-    ports:
-      - "3000:3000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Dá acesso aos comandos do Docker
-      - /:/host:ro # Opcional: acesso de leitura ao sistema host para medir CPU/RAM real
