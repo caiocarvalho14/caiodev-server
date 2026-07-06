@@ -15,4 +15,13 @@
         <button type="submit">Enviar</button>
     </form>
 </body>
+<script>
+    setInterval(function() {
+        fetch('/uptime')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('p').textContent = `Tempo de atividade: ${data.uptime} segundos`;
+            });
+    }, 1000);
+</script>
 </html>
