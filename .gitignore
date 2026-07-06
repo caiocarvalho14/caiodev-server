@@ -56,3 +56,6 @@ dist/
 
 # Docker (opcional)
 *.pid
+
+# node
+node_modules/
