@@ -19,7 +19,7 @@ services:
       TZ: America/Fortaleza
 
       # Configurações
-      MOTD: "Servidor do Caio"
+      MOTD: "CAIODEV SERVER"
       MODE: survival
       DIFFICULTY: hard
       ONLINE_MODE: "TRUE"
@@ -31,6 +31,9 @@ services:
       ENABLE_GEYSER: "true"
       ENABLE_FLOODGATE: "true"
       
+      ODRINTH_PROJECTS: |
+        geyser
+        floodgate
 
       # Reinicia automaticamente se travar
       ENABLE_ROLLING_LOGS: "true"
