@@ -7,4 +7,27 @@ services:
     volumes:
       - ./html:/usr/share/nginx/html:ro
     restart: always
-  
+    
+  minecraft-server:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft_geyser_server
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    ports:
+      - "25565:25565"          # Porta padrão do Minecraft Java (TCP)
+      - "19132:19132/udp"      # Porta padrão do Minecraft Bedrock (UDP)
+    environment:
+      EULA: "TRUE"             # Aceita os termos de uso automaticamente
+      TYPE: "PAPER"            # Define o core do servidor como PaperMC
+      VERSION: "LATEST"        # Baixa a versão mais recente estável
+      MEMORY: "4G"             # Limite de memória RAM dedicada ao container
+      
+      # Magia automática: baixa o Geyser e Floodgate na inicialização
+      PLUGINS: "geyser,floodgate" 
+      
+      # Configura o Geyser para usar autenticação via Floodgate automaticamente
+      GEYSER_AUTH_TYPE: "floodgate"
+    volumes:
+      # Aponta para a pasta local que você acabou de criar
+      - ./minecraft:/data
