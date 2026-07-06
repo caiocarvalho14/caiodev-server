@@ -44,17 +44,17 @@ services:
     networks:
       - minecraft
 
-  monitor:
-    container_name: minecraft_monitor
-    restart: unless-stopped
-    working_dir: /app
-    command: sleep infinity
-    volumes:
-      - ./monitor:/app
-    depends_on:
-      - minecraft
-    networks:
-      - minecraft
+  #monitor:
+  #  container_name: minecraft_monitor
+  #  restart: unless-stopped
+  #  working_dir: /app
+  # command: sleep infinity
+  # volumes:
+  #   - ./monitor:/app
+  # depends_on:
+  #   - minecraft
+  # networks:
+  #   - minecraft
 
 networks:
   minecraft:
