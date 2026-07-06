@@ -26,6 +26,8 @@ services:
       MODRINTH_PROJECTS: |
         geyser
         floodgate
+      
+      MODRINTH_ALLOWED_VERSION_TYPE: beta
 
       ENABLE_ROLLING_LOGS: "true"
 
