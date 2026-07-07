@@ -23,7 +23,7 @@ services:
 
       SEED: "6944174826991112"
 
-      PLUGINS: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"
+      PLUGINS: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot,https://github.com/NEZNAMY/TAB/releases/download/6.0.3/TAB.v6.0.3.-.Vanilla.jar"
 
       ENABLE_ROLLING_LOGS: "true"
 
