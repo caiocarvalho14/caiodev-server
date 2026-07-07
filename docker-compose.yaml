@@ -28,36 +28,7 @@ services:
       ENABLE_ROLLING_LOGS: "true"
 
     volumes:
-      - ./minecraft/data:/data
-
-    networks:
-      - game_network
-
-  terraria:
-    image: ryshe/terraria:latest
-    container_name: terraria_server
-    restart: unless-stopped
-    
-    stdin_open: true
-    tty: true
-
-    # Limita o uso de RAM para não sufocar a máquina
-    deploy:
-      resources:
-        limits:
-          memory: 1536M
-
-    ports:
-      - "7777:7777/tcp"
-      - "7777:7777/udp"
-
-    environment:
-      WORLD_NAME: "MundoServer.wld"
-      TZ: America/Fortaleza
-
-    volumes:
-      # Salva o mundo na pasta ./terraria/data ao lado do docker-compose
-      - ./terraria/data:/root/.local/share/Terraria/Worlds
+      - /srv/games/minecraft/data:/data
 
     networks:
       - game_network
@@ -85,7 +56,7 @@ services:
       N8N_PROTOCOL: "http"
 
     volumes:
-      - ./n8n/data:/home/node/.n8n
+      - /srv/docker/n8n/data:/home/node/.n8n
 
     networks:
       - game_network
@@ -93,15 +64,3 @@ services:
 networks:
   game_network:
     driver: bridge
-
-  #monitor:
-  #  container_name: minecraft_monitor
-  #  restart: unless-stopped
-  #  working_dir: /app
-  # command: sleep infinity
-  # volumes:
-  #   - ./monitor:/app
-  # depends_on:
-  #   - minecraft
-  # networks:
-  #   - minecraft
